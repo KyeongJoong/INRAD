@@ -4,7 +4,7 @@
 
 ### Time-Series Anomaly Detection with Implicit Neural Representation
 
-INRAD is a novel implicit neural representation-based method for multivariate time-series anomaly detection, along with a temporal encoding technique. 
+INRAD is a novel implicit neural representation-based method for multivariate time-series anomaly detection, along with a temporal encoding technique. You may refer to You may refer to [our paper](link later) for more details.
 
 
 ## Getting Started
