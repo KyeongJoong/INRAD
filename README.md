@@ -4,7 +4,7 @@
 
 ### Time-Series Anomaly Detection with Implicit Neural Representation
 
-OmniAnomaly is a novel implicit neural representation-based method for multivariate time-series anomaly detection, along with a temporal encoding technique. 
+INRAD is a novel implicit neural representation-based method for multivariate time-series anomaly detection, along with a temporal encoding technique. 
 
 
 ## Getting Started
