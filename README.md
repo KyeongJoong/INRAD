@@ -25,8 +25,11 @@ If you are interested in running your own dataset, please refer to 'example_INRA
 #### Packages (python == 3.7)
 
 numpy==1.20
+
 pandas==1.2.4
+
 pytorch==1.8.1
+
 scikit-learn==0.24.2
 
 #### Dataset details
