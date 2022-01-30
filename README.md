@@ -16,90 +16,60 @@ OmniAnomaly is a novel implicit neural representation-based method for multivari
 git clone https://github.com/KyeongJoong/INRAD && cd INRAD
 ```
 
-#### Get data
 
-SMD (Server Machine Dataset) is in folder `ServerMachineDataset`. 
+#### Implementation
 
-You can get the public datasets (SMAP and MSL) using:
+For the reproducibility check of our results on five datasets we use, please refer to 'main.py' or 'main.ipynb' file after 
+downloading each dataset (Please refer to 'Dataset Details' below).
+If you are interested in running your own dataset, please refer to 'example_INRAD.ipynb' or 'example_INRAD.html' file. 
 
-```shell
-wget https://s3-us-west-2.amazonaws.com/telemanom/data.zip && unzip data.zip && rm data.zip
+#### Packages (python == 3.7)
 
-cd data && wget https://raw.githubusercontent.com/khundman/telemanom/master/labeled_anomalies.csv
-```
+numpy==1.20
+pandas==1.2.4
+pytorch==1.8.1
+scikit-learn==0.24.2
 
-#### Install dependencies (with python 3.5, 3.6) 
+#### Dataset details
 
-(virtualenv is recommended)
-
-```shell
-pip install -r requirements.txt
-```
-
-#### Preprocess the data
-
-```shell
-python data_preprocess.py <dataset>
-```
-
-where `<dataset>` is one of `SMAP`, `MSL` or `SMD`.
-
-#### Run the code
-
-```
-python main.py
-```
-
-If you want to change the default configuration, you can edit `ExpConfig` in `main.py` or overwrite the config in `main.py` using command line args. For example:
-
-```
-python main.py --dataset='MSL' --max_epoch=20
-```
+1. SMD
+Source (download and preprocess introduction) link: https://github.com/NetManAIOps/OmniAnomaly
+Note that preprocess code on the link should be applied only on SMD dataset.
+Save the downloaded data inside the 'data/SMD' folder along with preprocessed data inside 'data/SMD/processed' folder.
 
 
-
-## Data
-
-### Dataset Information
-
-| Dataset name| Number of entities | Number of dimensions | Training set size |Testing set size |Anomaly ratio(%)|
-|------|----|----|--------|--------|-------|
-| SMAP | 55 | 25 | 135183 | 427617 | 13.13 |
-|MSL | 27 | 55 | 58317 | 73729 | 10.72|
-|SMD | 28 |38 | 708405 | 708420 | 4.16 |
+2. SMAP & MSL 
+Source (download introduction) link: https://github.com/khundman/telemanom
+Save the contents inside 'data/SMAP_MSL' folder along with 'labeled_anomalies.csv' file.
+Refer to the remained folder tree inside 'data/SMAP_MSL' folder.
 
 
+3. SWAT
+Source link: https://itrust.sutd.edu.sg/itrust-labs_datasets/ (Request for the dataset is needed on this link.)
+Following previous studies, we use
 
-### SMAP and MSL
+SWaT_Dataset_Normal_v0.xlsx
+SWaT_Dataset_Attack_v0.xlsx
+in 'SWaT.A1 _ A2_Dec 2015\Physical' folder ('SWaT.A1 & A2_Dec 2015 dataset' zip file).
 
-SMAP (Soil Moisture Active Passive satellite) and MSL (Mars Science Laboratory rover) are two public datasets from NASA.
+Basic preprocessing:
+- Erase empty row in each file.
+- Transform the xlsx format into csv format. (.xlsx --> .csv)
 
-For more details, see: <https://github.com/khundman/telemanom>
-
-
-
-### SMD
-
-SMD (Server Machine Dataset) is a new 5-week-long dataset. We collected it from a large Internet company. This dataset contains 3 groups of entities. Each of them is named by `machine-<group_index>-<index>`.
-
-SMD is made up by data from 28 different machines, and the 28 subsets should be trained and tested separately. For each of these subsets, we divide it into two parts of equal length for training and testing. We provide labels for whether a point is an anomaly and the dimensions contribute to every anomaly.
-
-Thus SMD is made up by the following parts:
-
-* train: The former half part of the dataset.
-* test: The latter half part of the dataset.
-* test_label: The label of the test set. It denotes whether a point is an anomaly. 
-* interpretation_label: The lists of dimensions contribute to each anomaly.
-
-concatenate
+Save the files ('SWaT_Dataset_Normal_v0.csv' and 'SWaT_Dataset_Attack_v0.xlsx') inside the 'data/SWaT' folder.
 
 
+4. WADI 
+Source link: https://itrust.sutd.edu.sg/itrust-labs_datasets/ (Request for the dataset is needed on this link).
+Following previous studies, we use
 
-## Processing
+'WADI_14days.csv'
+'WADI_attackdata.csv'
+in 'WADI.A1_9 Oct 2017' folder
+and
+'WADI_attackdataLABLE.csv'
+in 'WADI.A2_19 Nov 2019' folder ('WADI.A1_9 Oct 2017' zip file).
 
-With the default configuration, `main.py` follows these steps:
-
-* Train the model with training set, and validate at a fixed frequency. Early stop method is applied by default.
-* Test the model on both training set and testing set, and save anomaly score in `train_score.pkl` and `test_score.pkl`.
-* Find the best F1 score on the testing set, and print the results.
-* Init POT model on `train_score` to find the threshold of anomaly score, and using this threshold to predict on the testing set.
+Basic preprocessing:
+- Erase first row in 'WADI_attackdataLABLE.csv' file.
+- Erase first 4 rows in 'WADI_14days.csv' file
