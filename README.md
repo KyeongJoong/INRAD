@@ -13,7 +13,7 @@ OmniAnomaly is a novel implicit neural representation-based method for multivari
 #### Clone the repo
 
 ```
-git clone https://github.com/KyeongJoong/INRAD && cd OmniAnomaly
+git clone https://github.com/KyeongJoong/INRAD && cd INRAD
 ```
 
 #### Get data
